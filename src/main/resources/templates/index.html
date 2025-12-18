@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Meg's Pro Todo — Enhanced</title>
+    <link rel="stylesheet" href="/css/app.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+</head>
+
+<body>
+    <div class="page-wrap">
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <main class="container">
+            <!-- Left Sidebar - Filter Sections -->
+            <aside class="filter-sidebar">
+                <!-- Search & Filters -->
+                <div class="card glass-card">
+                    <h3>🔍 Search</h3>
+                    <input id="search" placeholder="Search tasks..." class="search-input" />
+                </div>
+
+                <div class="card glass-card">
+                    <h3>🏷️ Category</h3>
+                    <div class="category-filters">
+                        <button data-category="ALL" class="category-chip active">All</button>
+                        <button data-category="personal" class="category-chip">👤 Personal</button>
+                        <button data-category="work" class="category-chip">💼 Work</button>
+                        <button data-category="shopping" class="category-chip">🛒 Shopping</button>
+                        <button data-category="health" class="category-chip">💪 Health</button>
+                        <button data-category="learning" class="category-chip">📚 Learning</button>
+                    </div>
+                </div>
+
+                <div class="card glass-card">
+                    <h3>⚡ Priority</h3>
+                    <div class="chips">
+                        <button data-priority="ALL" class="chip active">All</button>
+                        <button data-priority="HIGH" class="chip priority-high">🔴 High</button>
+                        <button data-priority="MEDIUM" class="chip priority-medium">🟡 Medium</button>
+                        <button data-priority="LOW" class="chip priority-low">🟢 Low</button>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="card glass-card time-stats">
+                    <h3>⏱️ Time Estimates</h3>
+                    <div class="time-stat">
+                        <span>Total Remaining</span>
+                        <span class="time-value" id="totalTimeRemaining">0h 0m</span>
+                    </div>
+                    <div class="time-stat">
+                        <span>Completed Today</span>
+                        <span class="time-value" id="completedToday">0</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Center Column - Tasks -->
+            <section class="center-card">
+                <!-- Add Task Form - Enhanced -->
+                <div class="add-area card glass-card">
+                    <div class="add-form-row">
+                        <input id="taskInput" placeholder="✨ What needs to be done?" />
+                        <button id="addBtn" class="btn glow-btn">+ Add Task</button>
+                    </div>
+                    <div class="add-form-row details-row">
+                        <textarea id="taskDescription" placeholder="📝 Add description (optional)" rows="2"></textarea>
+                    </div>
+                    <div class="add-form-row options-row">
+                        <div class="option-group">
+                            <label>Priority</label>
+                            <select id="prioritySelect">
+                                <option value="MEDIUM">🟡 Medium</option>
+                                <option value="HIGH">🔴 High</option>
+                                <option value="LOW">🟢 Low</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label>Category</label>
+                            <select id="categorySelect">
+                                <option value="personal">👤 Personal</option>
+                                <option value="work">💼 Work</option>
+                                <option value="shopping">🛒 Shopping</option>
+                                <option value="health">💪 Health</option>
+                                <option value="learning">📚 Learning</option>
+                                <option value="other">📌 Other</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label>Due Date</label>
+                            <input type="date" id="dueDateInput" />
+                        </div>
+                        <div class="option-group">
+                            <label>Estimated Time</label>
+                            <select id="estimatedTime">
+                                <option value="15">15 min</option>
+                                <option value="30">30 min</option>
+                                <option value="60" selected>1 hour</option>
+                                <option value="120">2 hours</option>
+                                <option value="240">4 hours</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div id="filters" class="card small glass-card">
+                    <button class="tab active" data-filter="all">📋 All</button>
+                    <button class="tab" data-filter="active">⏳ Active</button>
+                    <button class="tab" data-filter="done">✅ Done</button>
+                    <button class="tab" data-filter="overdue">🔥 Overdue</button>
+                </div>
+
+                <h2 class="tasks-header">
+                    <span>My Tasks</span>
+                    <span class="task-count" id="taskCountBadge">0</span>
+                </h2>
+                <div id="todoList"></div>
+            </section>
+
+            <aside class="right-card">
+                <!-- Progress Dashboard -->
+                <div class="dashboard card glass-card">
+                    <h3>📊 Progress Dashboard</h3>
+                    <div class="progress-ring-container">
+                        <svg class="progress-ring" width="120" height="120">
+                            <circle class="progress-ring-bg" cx="60" cy="60" r="50" />
+                            <circle class="progress-ring-circle" id="progressCircle" cx="60" cy="60" r="50" />
+                        </svg>
+                        <div class="progress-text">
+                            <span id="progressPercent">0</span>%
+                        </div>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalCount">0</div>
+                            <div class="stat-label">Total</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="doneCount">0</div>
+                            <div class="stat-label">Done</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="activeCount">0</div>
+                            <div class="stat-label">Active</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="overdueCount">0</div>
+                            <div class="stat-label">Overdue</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pomodoro Timer -->
+                <div class="pomodoro card glass-card">
+                    <h3>🍅 Focus Timer</h3>
+                    <div class="timer-display" id="timerDisplay">25:00</div>
+                    <div class="timer-controls">
+                        <button class="timer-btn" id="startTimer">▶ Start</button>
+                        <button class="timer-btn" id="resetTimer">↺ Reset</button>
+                    </div>
+                    <div class="timer-presets">
+                        <button class="preset-btn active" data-minutes="25">25m</button>
+                        <button class="preset-btn" data-minutes="15">15m</button>
+                        <button class="preset-btn" data-minutes="5">5m</button>
+                    </div>
+                </div>
+
+                <!-- Streak & Gamification -->
+                <div class="gamification card glass-card">
+                    <h3>🏆 Your Streak</h3>
+                    <div class="streak-display">
+                        <div class="streak-fire">🔥</div>
+                        <div class="streak-count" id="streakCount">0</div>
+                        <div class="streak-label">days</div>
+                    </div>
+                    <div class="achievements">
+                        <span class="badge" title="First Task">🌟</span>
+                        <span class="badge locked" title="Complete 10 tasks">🎯</span>
+                        <span class="badge locked" title="7 day streak">💎</span>
+                        <span class="badge locked" title="Complete 100 tasks">👑</span>
+                    </div>
+                </div>
+
+
+            </aside>
+        </main>
+
+        <div th:replace="~{fragments/footer :: footer}"></div>
+    </div>
+
+    <!-- Subtask Modal -->
+    <div id="subtaskModal" class="modal">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h3>📋 Subtasks</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="parent-task-info" id="parentTaskInfo"></div>
+                <div class="subtask-list" id="subtaskList"></div>
+                <div class="add-subtask">
+                    <input id="subtaskInput" placeholder="Add a subtask..." />
+                    <button id="addSubtaskBtn" class="btn">+ Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Celebration Animation -->
+    <div id="celebration" class="celebration-container"></div>
+
+    <script type="module" src="/js/TodoList.js"></script>
+    <script type="module" src="/js/AddTask.js"></script>
+    <script type="module" src="/js/Features.js"></script>
+</body>
+
+</html>

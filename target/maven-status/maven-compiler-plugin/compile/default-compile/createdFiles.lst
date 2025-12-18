@@ -1,0 +1,5 @@
+com\meg\todo\controller\TodoApiController.class
+com\meg\todo\service\TodoService.class
+com\meg\todo\controller\ViewController.class
+com\meg\todo\entity\Todo.class
+com\meg\todo\MegTodoApplication.class

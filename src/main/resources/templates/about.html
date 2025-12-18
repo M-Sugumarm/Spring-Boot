@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About — Meg's Pro Todo</title>
+    <link rel="stylesheet" href="/css/app.css" />
+</head>
+
+<body>
+    <div class="page-wrap">
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <main class="container single">
+            <div class="card about-card">
+                <h2>About Meg's Pro Todo</h2>
+                <p>This demo shows a professional-looking Todo application built with Spring Boot and Thymeleaf.
+                    Interactions are powered by REST endpoints and JavaScript for a snappy feel.</p>
+
+                <h3>Features</h3>
+                <ul class="feature-list">
+                    <li>✔ Add, update, delete tasks</li>
+                    <li>✔ Filter by status and priority</li>
+                    <li>✔ Light/Dark mode toggle</li>
+                    <li>✔ Responsive design</li>
+                    <li>✔ Real-time search</li>
+                    <li>✔ Smooth animations</li>
+                </ul>
+
+                <h3>Technology Stack</h3>
+                <ul class="feature-list">
+                    <li>🚀 Spring Boot 3.1.4</li>
+                    <li>🎨 Thymeleaf Templates</li>
+                    <li>⚡ REST API</li>
+                    <li>💾 In-Memory Storage</li>
+                </ul>
+            </div>
+        </main>
+
+        <div th:replace="~{fragments/footer :: footer}"></div>
+    </div>
+</body>
+
+</html>
