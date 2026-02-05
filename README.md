@@ -1,3 +1,5 @@
+<img width="1920" height="1300" alt="screencapture-localhost-8080-2025-12-18-14_14_33" src="https://github.com/user-attachments/assets/49a4b29a-a1cf-4367-b81b-fa8a88b52aa3" />
+
 # MegTodo - Spring Boot Maven Project
 
 A modern, attractive Todo application built with Spring Boot and Thymeleaf.
@@ -11,6 +13,7 @@ A modern, attractive Todo application built with Spring Boot and Thymeleaf.
 - ✔ Light/Dark mode toggle
 - ✔ Responsive design
 - ✔ Smooth animations
+- ✔ **Cloud persistence with Firebase Firestore**
 
 ## Technology Stack
 
@@ -20,16 +23,7 @@ A modern, attractive Todo application built with Spring Boot and Thymeleaf.
 - **Database**: Firebase Firestore (Cloud NoSQL)
 - **Analytics**: Firebase Analytics
 
-## Features
-
-- ✔ Add, update, delete tasks
-- ✔ Filter by status (All, Active, Done)
-- ✔ Filter by priority (High, Medium, Low)
-- ✔ Real-time search
-- ✔ Light/Dark mode toggle
-- ✔ Responsive design
-- ✔ Smooth animations
-- ✔ **Cloud persistence with Firebase Firestore**
+## Prerequisites
 
 - Java 17 or higher
 - Maven 3.6+
@@ -84,6 +78,8 @@ MegTodo/
 │       └── application.properties
 └── README.md
 ```
+
+<img width="1920" height="1300" alt="screencapture-localhost-8080-2025-12-18-14_16_28" src="https://github.com/user-attachments/assets/1dad6070-17ec-4577-b1cf-00ab3964011c" />
 
 ## API Endpoints
 
