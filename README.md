@@ -91,6 +91,23 @@ MegTodo/
 | POST | `/api/todos/{id}/toggle` | Toggle todo completion |
 | DELETE | `/api/todos/{id}` | Delete a todo |
 
+## Deployment
+
+### Deploy to Render
+This project is configured for easy deployment on **Render**.
+
+1. **Push your code** to GitHub (already done if you followed the instructions).
+2. **Log in to [Render](https://render.com/)**.
+3. Click **"New +"** and select **"Web Service"**.
+4. Connect your GitHub repository: `Springboot-TODO`.
+5. Render will automatically detect the settings from `render.yaml`:
+   - **Runtime**: `Java`
+   - **Build Command**: `mvn clean package`
+   - **Start Command**: `java -jar target/megtodo-0.0.1-SNAPSHOT.jar`
+6. Click **"Deploy Web Service"**.
+
+---
+
 ## Future Enhancements
 
 - Persist todos using Spring Data JPA and H2/PostgreSQL
